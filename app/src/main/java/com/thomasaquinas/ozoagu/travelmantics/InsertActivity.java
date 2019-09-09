@@ -25,8 +25,8 @@ public class InsertActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_insert);
-        mFirebaseDatabase = FirebaseDatabase.getInstance();
-        mDatabaseReference = mFirebaseDatabase.getReference().child("traveldeals");
+        mFirebaseDatabase = FirebaseUtil.mFirebaseDatabase;
+        mDatabaseReference = FirebaseUtil.mDatabaseReference;
         txtTitle = (EditText) findViewById(R.id.txtTitle);
         txtDescription = (EditText) findViewById(R.id.txtDescription);
         txtPrice = (EditText) findViewById(R.id.txtPrice);
@@ -58,7 +58,7 @@ public class InsertActivity extends AppCompatActivity {
         String description = txtDescription.getText().toString();
         String price = txtPrice.getText().toString();
         TravelDeal deal = new TravelDeal(title, description, price, "");
-        mDatabaseReference.push().setValue(deal);
+        FirebaseUtil.mDatabaseReference.push().setValue(deal);
     }
 
     private void clean(){

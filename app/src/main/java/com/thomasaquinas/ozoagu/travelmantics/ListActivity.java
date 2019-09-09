@@ -3,6 +3,8 @@ package com.thomasaquinas.ozoagu.travelmantics;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.widget.TextView;
@@ -25,8 +27,15 @@ public class ListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
-        mFirebaseDatabase = FirebaseDatabase.getInstance();
-        mDatabaseReference = mFirebaseDatabase.getReference().child("traveldeals");
+        RecyclerView rvDeals = (RecyclerView)findViewById(R.id.rvDeals);
+        final DealAdapter adapter = new DealAdapter();
+        rvDeals.setAdapter(adapter);
+        LinearLayoutManager dealsLayoutManager =
+                new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        rvDeals.setLayoutManager(dealsLayoutManager);
+/*        FirebaseUtil.openFbReference("traveldeals");
+        mFirebaseDatabase = FirebaseUtil.mFirebaseDatabase;
+        mDatabaseReference = FirebaseUtil.mDatabaseReference;
         mChildListener = new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
@@ -55,6 +64,6 @@ public class ListActivity extends AppCompatActivity {
 
             }
         };
-        mDatabaseReference.addChildEventListener(mChildListener);
+        mDatabaseReference.addChildEventListener(mChildListener); */
     }
 }
