@@ -41,7 +41,7 @@ public class ListActivity extends AppCompatActivity {
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 TextView tvDeals = (TextView) findViewById(R.id.rvDeals);                       //Check if tvDeals
                 TravelDeal td = dataSnapshot.getValue(TravelDeal.class);
-                tvDeals.setText(tvDeals.getText() + "\n" + td.getTitle());
+                tvDeals.setText("@string/tv_Deal_Str");
             }
 
             @Override
