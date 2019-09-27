@@ -1,5 +1,6 @@
 package com.thomasaquinas.ozoagu.travelmantics;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -26,14 +27,14 @@ public class DealAdapter extends RecyclerView.Adapter<DealAdapter.DealViewHolder
     private DatabaseReference mDatabaseReference;
     private ChildEventListener mChildListener;
     public DealAdapter(){
-        FirebaseUtil.openFbReference("traveldeals");
+/*        FirebaseUtil.openFbReference("traveldeals"); */
         mFirebaseDatabase = FirebaseUtil.mFirebaseDatabase;
         mDatabaseReference = FirebaseUtil.mDatabaseReference;
-        deals = FirebaseUtil.mDeals;
+        this.deals = FirebaseUtil.mDeals;                                     //this.deals = FirebaseUtil.mDeals; //as in the expample file
         mChildListener = new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                            // TextView tvDeals = (TextView) findViewById(R.id.tvDeals);
+                            // TextView tvDeals = (TextView) findViewById(R.id.rvDeals);
                 TravelDeal td = dataSnapshot.getValue(TravelDeal.class);
                             // tvDeals.setText(tvDeals.getText() + "\n" + td.getTitle());
                 Log.d("Deal: ", td.getTitle());

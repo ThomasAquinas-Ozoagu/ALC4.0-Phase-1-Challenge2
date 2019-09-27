@@ -31,15 +31,15 @@ public class ListActivity extends AppCompatActivity {
         final DealAdapter adapter = new DealAdapter();
         rvDeals.setAdapter(adapter);
         LinearLayoutManager dealsLayoutManager =
-                new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+                new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
         rvDeals.setLayoutManager(dealsLayoutManager);
-/*        FirebaseUtil.openFbReference("traveldeals");
+        FirebaseUtil.openFbReference("traveldeals", this);
         mFirebaseDatabase = FirebaseUtil.mFirebaseDatabase;
         mDatabaseReference = FirebaseUtil.mDatabaseReference;
         mChildListener = new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                TextView tvDeals = (TextView) findViewById(R.id.tvDeals);
+                TextView tvDeals = (TextView) findViewById(R.id.rvDeals);                       //Check if tvDeals
                 TravelDeal td = dataSnapshot.getValue(TravelDeal.class);
                 tvDeals.setText(tvDeals.getText() + "\n" + td.getTitle());
             }
@@ -64,6 +64,16 @@ public class ListActivity extends AppCompatActivity {
 
             }
         };
-        mDatabaseReference.addChildEventListener(mChildListener); */
+        mDatabaseReference.addChildEventListener(mChildListener);
+    }
+    @Override
+    protected void onPause(){
+        super.onPause();
+        FirebaseUtil.detachListener();
+    }
+    @Override
+    protected void onResume(){
+        super.onResume();
+        FirebaseUtil.attachListener();
     }
 }
